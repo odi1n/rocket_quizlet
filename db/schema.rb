@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_14_151621) do
+ActiveRecord::Schema.define(version: 2021_04_14_151630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bases", force: :cascade do |t|
+    t.string "type", comment: "Тип вопрос/ответ"
+    t.string "text", comment: "Текст"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "bases_tests", id: false, force: :cascade do |t|
+    t.bigint "test_id", null: false
+    t.bigint "basis_id", null: false
+    t.index ["test_id", "basis_id"], name: "index_bases_tests_on_test_id_and_basis_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "title", comment: "Название категории"
+  end
+
+  create_table "categories_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "category_id", null: false
+    t.index ["user_id", "category_id"], name: "index_categories_users_on_user_id_and_category_id"
+  end
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.jsonb "data_data"
@@ -23,15 +46,15 @@ ActiveRecord::Schema.define(version: 2021_04_14_151621) do
     t.index ["type"], name: "index_ckeditor_assets_on_type"
   end
 
-  create_table "contact_messages", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "phone"
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["created_at"], name: "index_contact_messages_on_created_at"
-    t.index ["updated_at"], name: "index_contact_messages_on_updated_at"
+  create_table "comments", force: :cascade do |t|
+    t.string "commentable_type"
+    t.bigint "commentable_id"
+    t.bigint "user_id", null: false, comment: "Пользователи"
+    t.string "text", comment: "Текст комментария"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -45,49 +68,14 @@ ActiveRecord::Schema.define(version: 2021_04_14_151621) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
-  create_table "menus", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
-    t.string "slug", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["slug"], name: "index_menus_on_slug", unique: true
-  end
-
-  create_table "menus_pages", id: false, force: :cascade do |t|
-    t.integer "menu_id", null: false
-    t.integer "page_id", null: false
-  end
-
-  create_table "news", id: :serial, force: :cascade do |t|
-    t.boolean "enabled", default: true, null: false
-    t.datetime "time", null: false
-    t.string "name", null: false
-    t.text "excerpt"
-    t.text "content"
-    t.string "slug", null: false
-    t.jsonb "image_data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["enabled", "time"], name: "index_news_on_enabled_and_time"
-    t.index ["slug"], name: "index_news_on_slug", unique: true
-  end
-
-  create_table "pages", id: :serial, force: :cascade do |t|
-    t.boolean "enabled", default: true, null: false
-    t.integer "parent_id"
-    t.integer "lft"
-    t.integer "rgt"
-    t.integer "depth"
-    t.string "name", null: false
-    t.text "content"
-    t.string "slug", null: false
-    t.string "regexp"
-    t.string "redirect"
-    t.string "fullpath", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["enabled", "lft"], name: "index_pages_on_enabled_and_lft"
-    t.index ["slug"], name: "index_pages_on_slug", unique: true
+  create_table "question_answers", force: :cascade do |t|
+    t.bigint "question_id", null: false, comment: "Вопрос"
+    t.bigint "answer_id", null: false, comment: "Ответ"
+    t.boolean "is_correct", default: false, null: false, comment: "Проверка решен ли"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["answer_id"], name: "index_question_answers_on_answer_id"
+    t.index ["question_id"], name: "index_question_answers_on_question_id"
   end
 
   create_table "rails_admin_settings", id: :serial, force: :cascade do |t|
@@ -106,20 +94,13 @@ ActiveRecord::Schema.define(version: 2021_04_14_151621) do
     t.index ["ns", "key"], name: "index_rails_admin_settings_on_ns_and_key", unique: true
   end
 
-  create_table "seos", id: :serial, force: :cascade do |t|
-    t.boolean "enabled", default: true, null: false
-    t.integer "seoable_id"
-    t.string "seoable_type"
-    t.string "h1"
-    t.string "title"
-    t.text "keywords"
-    t.text "description"
-    t.string "og_title"
-    t.string "robots"
-    t.jsonb "og_image_data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["seoable_id", "seoable_type"], name: "index_seos_on_seoable_id_and_seoable_type", unique: true
+  create_table "requests", force: :cascade do |t|
+    t.bigint "user_id", null: false, comment: "Пользователи"
+    t.bigint "category_id", null: false, comment: "Категории"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_requests_on_category_id"
+    t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
   create_table "simple_captcha_data", id: :serial, force: :cascade do |t|
@@ -130,17 +111,36 @@ ActiveRecord::Schema.define(version: 2021_04_14_151621) do
     t.index ["key"], name: "idx_key"
   end
 
+  create_table "test_reports", force: :cascade do |t|
+    t.bigint "test_id", null: false, comment: "Связная с тестами"
+    t.bigint "user_id", null: false, comment: "Пользователи"
+    t.integer "state", comment: "Тип прохождения"
+    t.string "invite_token", comment: "Ссылка на репорт"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["test_id"], name: "index_test_reports_on_test_id"
+    t.index ["user_id"], name: "index_test_reports_on_user_id"
+  end
+
+  create_table "tests", force: :cascade do |t|
+    t.bigint "category_id", null: false, comment: "Категории"
+    t.integer "right_count", comment: "Правильный счет"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_tests_on_category_id"
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
+    t.string "email", default: "", null: false, comment: "Email"
+    t.string "encrypted_password", default: "", null: false, comment: "Password"
+    t.string "username", default: "", null: false, comment: "Имя пользователя"
+    t.string "lastname", default: "", null: false, comment: "Фамилия пользователя"
+    t.boolean "invite_token", default: false, comment: "Пригласительный токен"
+    t.integer "role", comment: "Роль пользвоателя"
     t.datetime "remember_created_at"
-    t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "versions", force: :cascade do |t|
@@ -153,6 +153,12 @@ ActiveRecord::Schema.define(version: 2021_04_14_151621) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
-  add_foreign_key "menus_pages", "menus", on_delete: :cascade
-  add_foreign_key "menus_pages", "pages", on_delete: :cascade
+  add_foreign_key "comments", "users"
+  add_foreign_key "question_answers", "bases", column: "answer_id"
+  add_foreign_key "question_answers", "bases", column: "question_id"
+  add_foreign_key "requests", "categories"
+  add_foreign_key "requests", "users"
+  add_foreign_key "test_reports", "tests"
+  add_foreign_key "test_reports", "users"
+  add_foreign_key "tests", "categories"
 end
