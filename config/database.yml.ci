@@ -1,0 +1,9 @@
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: rocket_quizlet_test
+  pool: 5
+  host: postgres
+  username: rocket_quizlet
+  password: rocket_quizlet
+  template: template0

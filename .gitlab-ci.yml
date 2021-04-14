@@ -1,0 +1,59 @@
+image: rocket_quizlet:latest
+
+services:
+  - postgres:latest
+
+variables:
+  POSTGRES_DB: rocket_quizlet_test
+  POSTGRES_USER: rocket_quizlet
+  POSTGRES_PASSWORD: "rocket_quizlet"
+
+cache:
+  untracked: true
+  key: "$CI_PROJECT_ID"
+  paths:
+    - node_modules/
+    - .bundled/
+    - .yarn
+    - tmp/cache
+
+rspec:
+  before_script:
+    - source /root/.bashrc
+    - nvm use node
+    - cp -f config/database.yml.ci config/database.yml
+    - cp -f config/secrets.yml.sample config/secrets.yml
+    - cat config/database.yml
+    - cat config/secrets.yml
+    - ruby -v
+    - which ruby
+    - export RAILS_ENV=test
+    - export CI=YES
+    - gem install bundler --no-ri --no-rdoc
+    - bundle install --jobs $(nproc) --path=/cache/bundler
+    - yarn --version
+    - yarn config set cache-folder .yarn
+    - yarn install
+    - bundle exec rake webpack:compile
+    - date
+    - RAILS_ENV=test bundle exec rake db:create db:schema:load
+  script:
+    - RAILS_ENV=test xvfb-run -a bundle exec rspec
+    - bundle exec pronto run -c=origin/master --exit-code
+
+dependency_scanning:
+  image: docker:stable
+  variables:
+    DOCKER_DRIVER: overlay2
+  allow_failure: true
+  services:
+    - docker:stable-dind
+  script:
+    - export SP_VERSION=$(echo "$CI_SERVER_VERSION" | sed 's/^\([0-9]*\)\.\([0-9]*\).*/\1-\2-stable/')
+    - docker run
+        --env DEP_SCAN_DISABLE_REMOTE_CHECKS="${DEP_SCAN_DISABLE_REMOTE_CHECKS:-false}"
+        --volume "$PWD:/code"
+        --volume /var/run/docker.sock:/var/run/docker.sock
+        "registry.gitlab.com/gitlab-org/security-products/dependency-scanning:$SP_VERSION" /code
+  artifacts:
+    paths: [gl-dependency-scanning-report.json]

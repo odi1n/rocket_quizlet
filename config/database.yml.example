@@ -1,0 +1,18 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: rocket_quizlet_development
+  pool: 5
+  host: 'localhost'
+  username: postgres
+  password: postgres
+  template: template0
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: rocket_quizlet_test
+  pool: 5
+  host: 'localhost'
+  username: rocket_quizlet
+  password: rocket_quizlet
+  template: template0
