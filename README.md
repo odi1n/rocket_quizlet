@@ -18,3 +18,9 @@ puma
 
 
 [Rs Pro - Rocket Cms](https://github.com/rs-pro/rocket_cms)
+
+[Rails admin](https://github.com/sferik/rails_admin/wiki)
+
+[Локализация](http://rusrails.ru/rails-internationalization-i18n-api)
+
+[Валидация](http://rusrails.ru/active-record-validations)

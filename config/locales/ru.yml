@@ -1,1 +1,60 @@
 ru:
+  index:
+    count:
+      one: '1 страница'
+  activerecord:
+    models:
+        answer: 'Ответ'
+        application_record: 'Заявки на прохождение тестов'
+        base: 'База'
+        category: 'Категории'
+        comment: 'Комментарии'
+        question: 'Вопросы'
+        question_answer: 'Список вопросы - ответы'
+        request: 'Запрос'
+        test: 'Тест'
+        test_report: 'Тест - вопросы'
+        user: 'Пользователи'
+    attributes:
+      base:
+        type: 'Тип'
+        tests: 'Тест'
+      answer:
+        type: 'Тип'
+        text: 'Текст'
+        tests: 'Тест'
+        question_answers: 'Вопросы - ответы'
+        questions: 'Вопрос'
+      question:
+        type: 'Тип'
+        text: 'Текст'
+        tests: 'Тест'
+        question_answers: 'Вопрос'
+        answers: 'Ответы'
+        comment: 'Комментарии'
+      question_answer:
+        question: 'Вопрос'
+        answer: 'Ответ'
+        is_correct: 'Пройден ли'
+      category:
+        title: 'Заголовок'
+        users: 'Пользователи'
+        tests: 'Тесты'
+      comment:
+        commentable: 'Вопрос'
+        user: 'Пользователь'
+      user:
+        username: 'Имя'
+        lastname: 'Фамилия'
+        invite_token: 'Инвайт токен'
+        role: 'Роль'
+        categories: 'Категории'
+        test_reports: 'Тесты'
+      test:
+        right_count: 'Пройдено'
+        questions: 'Вопрос'
+        test_reports: 'Тесты'
+      test_report:
+        users_test: 'Тест'
+        state: 'Статус'
+        invite_token: 'Инвайт токен'
