@@ -24,6 +24,15 @@ class TestReport < ApplicationRecord
     belongs_to :test
     belongs_to :user
 
+    alias_attribute :users_test, :test
+
     extend Enumerize
     enumerize :state, in: { :process => 0, :new => 1, :finished => 2, :accept => 3, :reject => 4 }, default: :reject
+
+    rails_admin do
+        field :users_test
+        field :user
+        field :state
+        field :invite_token
+    end
 end

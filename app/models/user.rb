@@ -19,11 +19,11 @@
 class User < ApplicationRecord
     has_and_belongs_to_many :categories
 
-    has_many :test_reports
+    has_many :test_reports, dependent: :nullify
 
     devise :database_authenticatable, :rememberable, :validatable
 
     extend Enumerize
-    enumerize :role, in: { :user => 0, :admin => 1 }
+    enumerize :role, in: { user: 0, admin: 1 }, default: :user
 
 end
