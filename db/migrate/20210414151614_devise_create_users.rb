@@ -10,7 +10,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
             t.string :username, null: false, default: "", comment: "Имя пользователя"
             t.string :lastname, null: false, default: "", comment: "Фамилия пользователя"
 
-            t.boolean :invite_token, default: false, comment: "Пригласительный токен"
+            t.string :invite_token, default: false, comment: "Пригласительный токен"
 
             t.integer :role, default: :user, comment: "Роль пользвоателя"
 

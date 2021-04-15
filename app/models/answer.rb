@@ -9,6 +9,12 @@
 #  updated_at             :datetime         not null
 #
 class Answer < Base
+    validates :type, presence: true
+    validates :text, presence: true
+    validates_associated :tests
+    validates_associated :questions
+    validates_associated :question_answers
+
     has_many :question_answers, dependent: :destroy
     has_many :questions, through: :question_answers
 end

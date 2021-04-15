@@ -22,5 +22,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Comment < ApplicationRecord
+    validates :text, presence: true
+
     belongs_to :commentable, polymorphic: true
 end

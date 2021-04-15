@@ -58,3 +58,6 @@ ru:
         users_test: 'Тест'
         state: 'Статус'
         invite_token: 'Инвайт токен'
+      request:
+        user: 'Пользователь'
+        category: 'Категория'
