@@ -26,12 +26,12 @@ class User < ApplicationRecord
     validates :email, presence: true,
               uniqueness: true
 
-    validates :password, presence: true,
-              confirmation: true,
-              on: :update
-    validates :passwrod, confirmation: true,
-              allow_blank: true,
-              on: :update
+    # validates :password, presence: true,
+    #           confirmation: true,
+    #           on: :update
+    # validates :passwrod, confirmation: true,
+    #           allow_blank: true,
+    #           on: :update
     validates :username, presence: true
     validates :lastname, presence: true
     validates :role, presence: true

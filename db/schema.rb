@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2021_04_14_151630) do
   create_table "comments", force: :cascade do |t|
     t.string "commentable_type"
     t.bigint "commentable_id"
-    t.bigint "user_id", null: false, comment: "Пользователи"
+    t.bigint "user_id", comment: "Пользователи"
     t.string "text", comment: "Текст комментария"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(version: 2021_04_14_151630) do
     t.string "encrypted_password", default: "", null: false, comment: "Password"
     t.string "username", default: "", null: false, comment: "Имя пользователя"
     t.string "lastname", default: "", null: false, comment: "Фамилия пользователя"
-    t.boolean "invite_token", default: false, comment: "Пригласительный токен"
+    t.string "invite_token", default: "", comment: "Пригласительный токен"
     t.integer "role", comment: "Роль пользвоателя"
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false

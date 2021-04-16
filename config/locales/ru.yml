@@ -10,7 +10,7 @@ ru:
         category: 'Категории'
         comment: 'Комментарии'
         question: 'Вопросы'
-        question_answer: 'Список вопросы - ответы'
+        question_answer: 'Ответ к вопросу'
         request: 'Запрос'
         test: 'Тест'
         test_report: 'Тест - вопросы'
@@ -35,7 +35,7 @@ ru:
       question_answer:
         question: 'Вопрос'
         answer: 'Ответ'
-        is_correct: 'Пройден ли'
+        is_correct: 'Правильный ответ'
       category:
         title: 'Заголовок'
         users: 'Пользователи'

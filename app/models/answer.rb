@@ -17,4 +17,8 @@ class Answer < Base
 
     has_many :question_answers, dependent: :destroy
     has_many :questions, through: :question_answers
+
+    rails_admin do
+        field :text
+    end
 end

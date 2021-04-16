@@ -23,6 +23,11 @@
 #
 class Comment < ApplicationRecord
     validates :text, presence: true
-
     belongs_to :commentable, polymorphic: true
+
+    rails_admin do
+        # field :commentable
+        # field :user
+        field :text
+    end
 end

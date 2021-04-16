@@ -62,6 +62,8 @@ RailsAdmin.config do |config|
   config.excluded_models = [
       'RailsAdmin::CustomShowInApp', 'HistoryTracker',
       'Ckeditor::Asset', 'Ckeditor::AttachmentFile', 'Ckeditor::Picture',
+
+      'Base' # Исключаем
   ]
 end
 

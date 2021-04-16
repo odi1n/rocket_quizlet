@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     end
 
     rescue_from CanCan::AccessDenied do |exception|
-        if !user_signed_in?
+        if user_signed_in?
             scope = rails_admin? ? main_app : self
             redirect_to scope.new_user_session_path, alert: "Необходимо авторизоваться"
             authenticate_user!

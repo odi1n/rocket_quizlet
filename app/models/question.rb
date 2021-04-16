@@ -9,16 +9,21 @@
 #  updated_at             :datetime         not null
 #
 class Question < Base
-    validates :type, presence: true
     validates :text, presence: true
-    validates_associated :tests
-    validates_associated :question_answers
-    validates_associated :answers
-
 
     has_one :comment, as: :commentable
+    accepts_nested_attributes_for :comment
 
     has_many :question_answers, dependent: :destroy
     has_many :answers, through: :question_answers
 
+    has_and_belongs_to_many :tests,
+                            class_name: "Test",
+                            foreign_key: "test_id",
+                            association_foreign_key: "basis_id"
+    rails_admin do
+        field :text
+        field :comment
+        field :answers
+    end
 end
