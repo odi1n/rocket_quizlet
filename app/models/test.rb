@@ -20,6 +20,7 @@ class Test < ApplicationRecord
     belongs_to :category
 
     has_many :test_reports, dependent: :nullify
+
     has_and_belongs_to_many :questions,
                             class_name: "Question",
                             foreign_key: "test_id",

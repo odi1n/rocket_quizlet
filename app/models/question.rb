@@ -19,11 +19,11 @@ class Question < Base
 
     has_and_belongs_to_many :tests,
                             class_name: "Test",
-                            foreign_key: "test_id",
-                            association_foreign_key: "basis_id"
+                            foreign_key: "basis_id",
+                            association_foreign_key: "test_id"
     rails_admin do
         field :text
         field :comment
-        field :answers
+        field :question_answers
     end
 end

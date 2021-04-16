@@ -19,16 +19,17 @@ html lang="ru"
   / = javascript_include_tag *webpack_asset_paths('vendor', extension: 'js', ignore_missing: true)
   / = javascript_include_tag *webpack_asset_paths('application', extension: 'js')
 
-  body.no-js class="container"
+  body.no-js
     = render 'components/header'
     script.no-js-script
       | document.body.classList.remove('no-js');
 
-    main
+    main class="container"
       = render 'shared/messages'
       = yield
 
-    = render 'components/footer'
+    div class="container"
+      = render 'components/footer'
 
     #fb-root data-turbolinks-permanent=""
     #vk_api_transport data-turbolinks-permanent=""
