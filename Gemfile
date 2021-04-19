@@ -49,6 +49,10 @@ gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 gem 'bootsnap', require: false
 gem 'irb'
 
+# form
+gem 'simple_form'
+
+
 group :development do
     #gem 'binding_of_caller'
     #gem 'better_errors', github: 'charliesome/better_errors'
