@@ -14,6 +14,8 @@ class Question < Base
     has_one :comment, as: :commentable
     accepts_nested_attributes_for :comment
 
+    belongs_to :category
+
     has_many :question_answers, dependent: :destroy
     has_many :answers, through: :question_answers
 

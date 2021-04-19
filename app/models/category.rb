@@ -10,8 +10,8 @@ class Category < ApplicationRecord
     validates_associated :users
     validates_associated :tests
 
-
     has_many :tests
+    has_many :questions
 
     has_and_belongs_to_many :users
 
