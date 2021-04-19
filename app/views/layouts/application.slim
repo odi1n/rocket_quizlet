@@ -15,7 +15,7 @@ html lang="ru"
     = javascript_include_tag "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
 
   / = stylesheet_link_tag *webpack_asset_paths('vendor', extension: 'css', ignore_missing: true)
-  / = stylesheet_link_tag *webpack_asset_paths('application', extension: 'css')
+  = stylesheet_link_tag 'application', extension: 'css'
   / = javascript_include_tag *webpack_asset_paths('vendor', extension: 'js', ignore_missing: true)
   / = javascript_include_tag *webpack_asset_paths('application', extension: 'js')
 

@@ -1,0 +1,4 @@
+ul class="row"
+  - for category in @categories
+    li class=" col-2"
+      a class="btn btn-warning mt-2" href=category_path(category.id) = category.title
