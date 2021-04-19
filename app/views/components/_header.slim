@@ -6,8 +6,8 @@ header.header
     - if user_signed_in?
       a class="btn btn-outline-primary mr-2" href="/" Главная
       a class="btn btn-outline-primary mr-2" href=categories_path Категории
-      a class="btn btn-outline-primary mr-2" href="/" Вопросы
-      a class="btn btn-outline-primary mr-2" href="/" Ответ
+      / a class="btn btn-outline-primary mr-2" href="/" Вопросы
+      / a class="btn btn-outline-primary mr-2" href="/" Ответ
       / a class="btn btn-outline-primary mr-2" href=destroy_user_session_path Выйти
 
       - if current_user.role == :admin

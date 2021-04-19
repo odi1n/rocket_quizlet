@@ -1,4 +1,11 @@
-ul class="row"
+div class="row"
   - for category in @categories
-    li class=" col-2"
-      a class="btn btn-warning mt-2" href=category_path(category.id) = category.title
+   div class="col-3 pb-3"
+    div class="card" style="background:#fff"
+      div class="card-body"
+        h3 = category.title
+        div class="row"
+          div class="col-12 pt-2"
+            a class="btn btn-warning w-100 h-100" href=category_path(category.id) = "Перейти"
+          div class="col-12 pt-2"
+            a class="btn btn-primary w-100 h-100" href="#" = "Открыть новую"
