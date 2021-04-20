@@ -20,6 +20,7 @@ class Test < ApplicationRecord
     validates :title, presence: true
 
     belongs_to :category
+    belongs_to :test
 
     has_many :test_reports, dependent: :nullify
 

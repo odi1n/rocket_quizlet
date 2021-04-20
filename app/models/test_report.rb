@@ -26,12 +26,12 @@ class TestReport < ApplicationRecord
 
     validates_associated :test, presence: true
     validates :state, presence: true
-    validates :invite_token, presence: true
 
     belongs_to :test
     belongs_to :user
 
     alias_attribute :users_test, :test
+    attribute :user_test
 
     rails_admin do
         field :users_test

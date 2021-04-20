@@ -1,19 +1,23 @@
 h2 class="mt-4 mb-4" = "Тест" + " - " + @test.title
 hr
-h3 class="mt-4 mb-4" = "Вопросы"
 
-div class="mt-4 mb-4"
-  form method="POST" action=category_tests_url
-    - @test.questions.each do |question|
-      div class="form-group card-box p-2"
-        h4 class="card-title" = question.text
-        hr
-        div class="m-4"
-          - if question.answers.count > 0
-            - question.answers.each do |answer|
-              div class="form-check mb-2"
-                input class="form-check-input" type="radio" name="answer[#{question.id}]" id = "test#{answer.id}" value=answer.id
-                label class="form-check-label" for="test#{answer.id}" = answer.text
+- if @test_report == nil
+    div class="mt-4 mb-4"
+      button class="btn btn-primary w-100" name="start" value="start" = "Начать"
+- else
+    h3 class="mt-4 mb-4" = "Вопросы"
+    div class="mt-4 mb-4"
+      form method="POST" action=category_tests_url
+        - @test.questions.each do |question|
+          div class="form-group card-box p-2"
+            h4 class="card-title" = question.text
+            hr
+            div class="m-4"
+              - if question.answers.count > 0
+                - question.answers.each do |answer|
+                  div class="form-check mb-2"
+                    input class="form-check-input" type="radio" name="answer[#{question.id}]" id = "test#{answer.id}" value=answer.id
+                    label class="form-check-label" for="test#{answer.id}" = answer.text
 
 
-    button type="submit" class="btn btn-warning w-100" = "Отправить"
+        button type="submit" class="btn btn-warning w-100" = "Отправить"
