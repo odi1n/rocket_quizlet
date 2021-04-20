@@ -38,5 +38,6 @@ class TestReport < ApplicationRecord
         field :user
         field :state
         field :invite_token
+        field :right_count
     end
 end

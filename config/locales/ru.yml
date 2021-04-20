@@ -51,13 +51,14 @@ ru:
         categories: 'Категории'
         test_reports: 'Тесты'
       test:
-        right_count: 'Пройдено'
+        title: 'Заголовок'
         questions: 'Вопрос'
         test_reports: 'Тесты'
       test_report:
         users_test: 'Тест'
         state: 'Статус'
         invite_token: 'Инвайт токен'
+        right_count: 'Пройдено'
       request:
         user: 'Пользователь'
         category: 'Категория'

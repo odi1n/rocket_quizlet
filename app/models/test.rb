@@ -17,6 +17,8 @@
 #  fk_rails_...  (category_id => categories.id)
 #
 class Test < ApplicationRecord
+    validates :title, presence: true
+
     belongs_to :category
 
     has_many :test_reports, dependent: :nullify
@@ -27,8 +29,8 @@ class Test < ApplicationRecord
                             association_foreign_key: "basis_id"
 
     rails_admin do
+        field :title
         field :category
         field :questions
-        field :right_count
     end
 end

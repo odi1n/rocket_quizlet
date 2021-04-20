@@ -39,4 +39,11 @@ class User < ApplicationRecord
     has_and_belongs_to_many :categories
     has_many :test_reports, dependent: :nullify
 
+    rails_admin do
+        object_label_method :get_name
+    end
+
+    def get_name
+        "# #{id} - #{email}"
+    end
 end

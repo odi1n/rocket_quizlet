@@ -1,10 +1,11 @@
-h2 class="mt-4 mb-4" = "Категория" + " - " + "Категория 1"
+h2 class="mt-4 mb-4" = "Категория" + " - " + @category.title
 hr
+h3 class="mt-4 mb-4" = "Тесты"
 div
   div class="row"
-    - @category.questions.each do |question|
+    - @tests.each do |test|
       div class="col-4"
         div class="card mb-3 card-box"
           div class="card-body"
-            h4 class="card-text" = question.text
-            a class="btn btn-outline-warning w-100" href="#" = "Перейти"
+            h4 class="card-title" = test.title
+            a class="btn btn-outline-warning w-100" href=category_tests_path(@category, test) = "Перейти"
