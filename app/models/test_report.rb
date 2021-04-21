@@ -31,7 +31,6 @@ class TestReport < ApplicationRecord
     belongs_to :user
 
     rails_admin do
-        field :title
         field :test_case
         field :user
         field :state

@@ -122,7 +122,6 @@ ActiveRecord::Schema.define(version: 2021_04_14_151630) do
   end
 
   create_table "test_reports", force: :cascade do |t|
-    t.string "title", comment: "Название теста"
     t.bigint "test_cases_id", comment: "Связная с тестами"
     t.bigint "user_id", null: false, comment: "Пользователи"
     t.integer "state", comment: "Тип прохождения"
