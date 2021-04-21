@@ -15,6 +15,12 @@ class Answer < Base
     has_many :questions, through: :question_answers
 
     rails_admin do
+        object_label_method :get_name
+
         field :text
+    end
+
+    def get_name
+        text
     end
 end

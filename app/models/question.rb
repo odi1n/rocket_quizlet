@@ -24,9 +24,15 @@ class Question < Base
                             foreign_key: "basis_id",
                             association_foreign_key: "test_case_id"
     rails_admin do
+        object_label_method :get_name
+
         field :text
         field :comment
         field :category
         field :question_answers
+    end
+
+    def get_name
+        text
     end
 end
