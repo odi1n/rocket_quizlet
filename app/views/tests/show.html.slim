@@ -1,4 +1,4 @@
-h2 class="mt-4 mb-4" = "Тест" + " - " + @test.title
+h2 class="mt-4 mb-4" = "Тест" + " - " + @test_case.title
 hr
 
 - if @test_report == nil
@@ -8,7 +8,7 @@ hr
     h3 class="mt-4 mb-4" = "Вопросы"
     div class="mt-4 mb-4"
       form method="POST" action=category_tests_url
-        - @test.questions.each do |question|
+        - @test_case.questions.each do |question|
           div class="form-group card-box p-2"
             h4 class="card-title" = question.text
             hr

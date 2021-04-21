@@ -1,9 +1,10 @@
-# admin_pw = "123123"
-# User.destroy_all
-# User.create!(email: 'admin@rocket-quizlet.ru', password: admin_pw, password_confirmation: admin_pw, role: :admin, username: "test", lastname: "test")
+admin_pw = "123123"
+User.destroy_all
+User.create!(email: 'admin@rocket-quizlet.ru', password: admin_pw, password_confirmation: admin_pw, role: :admin, username: "Admin", lastname: "Quizlet")
 
-Base.create!(type: Question, text: "Как дела?",)
-Base.create!(type: Question, text: "Как прошел день?",)
-Base.create!(type: Question, text: "Что такое пирог?",)
-Base.create!(type: Question, text: "Да, это нет?",)
-Base.create!(type: Question, text: "Почему нет или да?",)
+Question.create(text: "Как дела?")
+Question.create(text: "Как прошел день?")
+Question.create(text: "Что такое пирог?")
+Question.create(text: "Да, это нет?")
+Question.create(text: "Почему нет или да?")
+

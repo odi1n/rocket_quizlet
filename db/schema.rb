@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_20_113510) do
+ActiveRecord::Schema.define(version: 2021_04_14_151630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,16 +18,16 @@ ActiveRecord::Schema.define(version: 2021_04_20_113510) do
   create_table "bases", force: :cascade do |t|
     t.string "type", comment: "Тип вопрос/ответ"
     t.string "text", comment: "Текст"
+    t.bigint "category_id", comment: "Категория"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "category_id"
     t.index ["category_id"], name: "index_bases_on_category_id"
   end
 
-  create_table "bases_tests", id: false, force: :cascade do |t|
-    t.bigint "test_id", null: false
+  create_table "bases_test_cases", id: false, force: :cascade do |t|
+    t.bigint "test_case_id", null: false
     t.bigint "basis_id", null: false
-    t.index ["test_id", "basis_id"], name: "index_bases_tests_on_test_id_and_basis_id"
+    t.index ["test_case_id", "basis_id"], name: "index_bases_test_cases_on_test_case_id_and_basis_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -113,24 +113,25 @@ ActiveRecord::Schema.define(version: 2021_04_20_113510) do
     t.index ["key"], name: "idx_key"
   end
 
-  create_table "test_reports", force: :cascade do |t|
-    t.bigint "test_id", null: false, comment: "Связная с тестами"
-    t.bigint "user_id", null: false, comment: "Пользователи"
-    t.integer "state", comment: "Тип прохождения"
-    t.string "invite_token", comment: "Ссылка на репорт"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "right_count"
-    t.index ["test_id"], name: "index_test_reports_on_test_id"
-    t.index ["user_id"], name: "index_test_reports_on_user_id"
-  end
-
-  create_table "tests", force: :cascade do |t|
+  create_table "test_cases", force: :cascade do |t|
+    t.string "title"
     t.bigint "category_id", null: false, comment: "Категории"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "title"
-    t.index ["category_id"], name: "index_tests_on_category_id"
+    t.index ["category_id"], name: "index_test_cases_on_category_id"
+  end
+
+  create_table "test_reports", force: :cascade do |t|
+    t.string "title", comment: "Название теста"
+    t.bigint "test_cases_id", comment: "Связная с тестами"
+    t.bigint "user_id", null: false, comment: "Пользователи"
+    t.integer "state", comment: "Тип прохождения"
+    t.string "invite_token", comment: "Ссылка на репорт"
+    t.integer "right_count", default: 0, null: false, comment: "Кол-во правильных ответов"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["test_cases_id"], name: "index_test_reports_on_test_cases_id"
+    t.index ["user_id"], name: "index_test_reports_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -138,7 +139,7 @@ ActiveRecord::Schema.define(version: 2021_04_20_113510) do
     t.string "encrypted_password", default: "", null: false, comment: "Password"
     t.string "username", default: "", null: false, comment: "Имя пользователя"
     t.string "lastname", default: "", null: false, comment: "Фамилия пользователя"
-    t.string "invite_token", default: "", comment: "Пригласительный токен"
+    t.string "invite_token", default: "f", comment: "Пригласительный токен"
     t.integer "role", comment: "Роль пользвоателя"
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
@@ -162,7 +163,7 @@ ActiveRecord::Schema.define(version: 2021_04_20_113510) do
   add_foreign_key "question_answers", "bases", column: "question_id"
   add_foreign_key "requests", "categories"
   add_foreign_key "requests", "users"
-  add_foreign_key "test_reports", "tests"
+  add_foreign_key "test_cases", "categories"
+  add_foreign_key "test_reports", "test_cases", column: "test_cases_id"
   add_foreign_key "test_reports", "users"
-  add_foreign_key "tests", "categories"
 end

@@ -19,8 +19,6 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Request < ApplicationRecord
-    validates_associated :user
-    validates_associated :category
 
     belongs_to :user
     belongs_to :category

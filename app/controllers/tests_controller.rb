@@ -1,12 +1,12 @@
 class TestsController < ApplicationController
     def show
         user = current_user
-        @test_report = TestReport.find_by(user_id: user.id, test: params[:id])
-        @test = Test.find(params[:id])
+        @test_report = TestReport.find_by(user_id: user.id, test_cases_id: params[:id])
+        @test = TestCase.find(params[:id])
     end
 
     def create
-        @test = Test.find(5)
+        @test_case = TestCase.find(1)
         render plain: params[:answer]
     end
 end

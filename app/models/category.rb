@@ -7,17 +7,15 @@
 #
 class Category < ApplicationRecord
     validates :title, presence: true
-    validates_associated :users
-    validates_associated :tests
 
-    has_many :tests
+    has_many :test_cases
     has_many :questions
 
     has_and_belongs_to_many :users
 
     rails_admin do
         field :title
-        field :tests
+        field :test_cases
         field :users
     end
 end

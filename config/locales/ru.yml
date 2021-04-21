@@ -12,23 +12,22 @@ ru:
         question: 'Вопросы'
         question_answer: 'Ответ к вопросу'
         request: 'Запрос'
-        test: 'Тест'
+        test_case: 'Тест'
         test_report: 'Тест - вопросы'
         user: 'Пользователи'
     attributes:
       base:
         type: 'Тип'
-        tests: 'Тест'
+        test_cases: 'Тест'
       answer:
         type: 'Тип'
         text: 'Текст'
-        tests: 'Тест'
+        test_cases: 'Тест'
         question_answers: 'Вопросы - ответы'
         questions: 'Вопрос'
       question:
-        type: 'Тип'
         text: 'Текст'
-        tests: 'Тест'
+        test_cases: 'Тест'
         question_answers: 'Вопрос'
         answers: 'Ответы'
         comment: 'Комментарии'
@@ -39,7 +38,7 @@ ru:
       category:
         title: 'Заголовок'
         users: 'Пользователи'
-        tests: 'Тесты'
+        test_cases: 'Тесты'
       comment:
         commentable: 'Вопрос'
         user: 'Пользователь'
@@ -50,12 +49,13 @@ ru:
         role: 'Роль'
         categories: 'Категории'
         test_reports: 'Тесты'
-      test:
+      tests_case:
         title: 'Заголовок'
         questions: 'Вопрос'
         test_reports: 'Тесты'
       test_report:
-        users_test: 'Тест'
+        title: 'Заголовок'
+        test_case: 'Тест'
         state: 'Статус'
         invite_token: 'Инвайт токен'
         right_count: 'Пройдено'
