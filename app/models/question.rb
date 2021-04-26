@@ -29,7 +29,7 @@ class Question < Base
         field :text
         field :comment
         field :category
-        field :question_answers
+        # field :question_answers
     end
 
     def get_name

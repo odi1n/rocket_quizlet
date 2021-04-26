@@ -1,0 +1,12 @@
+h2 class="mt-4 mb-4" = "Тест" + (@test_report != nil ? " - " + @test_report.test_case.title : '')
+hr
+
+- if @test_report.nil?
+  div class="mt-4 mb-4"
+    = simple_form_for TestReport.new, url: test_report_index_path do |f|
+      = f.input :test_case_id, as: :hidden, name: 'test_case_id', input_html: { value: params[:id] }
+      = f.submit 'Начать', class: "btn btn-primary w-100"
+- else @test_report.nil?
+  div class="mt-4 mb-4"
+    div class="text-center"
+      h3 = "Тест пройден на - #{@test_report.right_count}%"

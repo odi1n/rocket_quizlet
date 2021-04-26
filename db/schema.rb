@@ -122,14 +122,14 @@ ActiveRecord::Schema.define(version: 2021_04_14_151630) do
   end
 
   create_table "test_reports", force: :cascade do |t|
-    t.bigint "test_cases_id", comment: "Связная с тестами"
+    t.bigint "test_case_id", comment: "Связная с тестами"
     t.bigint "user_id", null: false, comment: "Пользователи"
     t.integer "state", comment: "Тип прохождения"
     t.string "invite_token", comment: "Ссылка на репорт"
     t.integer "right_count", default: 0, null: false, comment: "Кол-во правильных ответов"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["test_cases_id"], name: "index_test_reports_on_test_cases_id"
+    t.index ["test_case_id"], name: "index_test_reports_on_test_case_id"
     t.index ["user_id"], name: "index_test_reports_on_user_id"
   end
 
@@ -163,6 +163,6 @@ ActiveRecord::Schema.define(version: 2021_04_14_151630) do
   add_foreign_key "requests", "categories"
   add_foreign_key "requests", "users"
   add_foreign_key "test_cases", "categories"
-  add_foreign_key "test_reports", "test_cases", column: "test_cases_id"
+  add_foreign_key "test_reports", "test_cases"
   add_foreign_key "test_reports", "users"
 end

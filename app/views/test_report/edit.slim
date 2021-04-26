@@ -1,0 +1,20 @@
+h2 class="mt-4 mb-4" = "Тест" + (@test_report != nil ? " - " + @test_report.test_case.title : '')
+hr
+
+h3 class="mt-4 mb-4" = "Вопросы"
+div class="mt-4 mb-4"]
+  = form_with url: test_report_path(@test_report), method: "put" do |f|
+    - @test_report.test_case.questions.each do |question|
+      - if question.answers.count <= 0
+        - next
+
+      div class="form-group card-box p-3"
+        h4 class="card-title" = question.text
+        hr
+        div class="m-4"
+          - question.answers.each do |answer|
+            div class="form-check mb-2"
+              = f.radio_button :"answer[#{question.id}]", answer.id, class: "form-check-input"
+              = f.label :"answer#{answer.id}", answer.text, for:"answer[#{question.id}]_#{answer.id}",  class: "form-check-label"
+
+    = f.submit 'Отправить', class: "btn btn-warning w-100"

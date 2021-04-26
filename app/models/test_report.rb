@@ -24,7 +24,6 @@ class TestReport < ApplicationRecord
     extend Enumerize
     enumerize :state, in: { :process => 0, :new => 1, :finished => 2, :accept => 3, :reject => 4 }, default: :reject
 
-    validates :title, presence: true
     validates :state, presence: true
 
     belongs_to :test_case, inverse_of: :test_reports

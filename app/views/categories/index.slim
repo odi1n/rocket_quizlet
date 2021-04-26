@@ -2,13 +2,13 @@ h2 class="mt-4 mb-4" = "Категории"
 hr
 
 div class="row"
-  - for category in @categories
-   div class="col-3 pb-3"
-    div class="card card-box"
-      div class="card-body"
-        h3 = category.title
-        div class="row"
-          div class="col-12 pt-2"
-            a class="btn btn-warning w-100 h-100" href=category_path(category.id) = "Перейти"
-          div class="col-12 pt-2"
-            a class="btn btn-primary w-100 h-100" href="#" = "Открыть новую"
+  - @categories.each do |category|
+    div class="col-3 pb-3"
+      div class="card card-box"
+        div class="card-body"
+          h3 = category.title
+          div class="row"
+            div class="col-12 pt-2"
+              a class="btn btn-warning w-100 h-100" href=category_path(category.id) = "Перейти"
+            div class="col-12 pt-2"
+              a class="btn btn-primary w-100 h-100" href="#" = "Открыть новую"

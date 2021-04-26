@@ -9,8 +9,9 @@ Rails.application.routes.draw do
 
     root to: 'home#index'
 
+    resources :test_report, only: [:create, :edit, :update]
+
     resources :categories do
-        get "tests/:id", to: "tests#show", as: "tests"
-        post "tests/:id", to: "tests#create"
+        resources :test_case, only: [:show], path: "test"
     end
 end
