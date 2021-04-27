@@ -8,5 +8,5 @@ div
         div class="card mb-3 card-box"
           div class="card-body"
             h4 class="card-title" = test.title
-            = link_to "Перейти", category_test_case_path(category_id: @category.id, test: test)
+            = link_to "Перейти", category_test_case_path(@category.id, test), class: "btn btn-outline-warning w-100"
             / a class="btn btn-outline-warning w-100" href=category_test_case_index_path(@category, test)
