@@ -8,7 +8,9 @@ div class="row"
         div class="card-body"
           h3 = category.title
           div class="row"
-            div class="col-12 pt-2"
-              a class="btn btn-warning w-100 h-100" href=category_path(category.id) = "Перейти"
-            div class="col-12 pt-2"
-              a class="btn btn-primary w-100 h-100" href="#" = "Открыть новую"
+            - if category.users.find_by(id: current_user.id).nil?
+              div class="col-12 pt-2"
+                a class="btn btn-primary w-100 h-100" href=category_open_path(category) = "Заявка на открытие"
+            - else
+              div class="col-12 pt-2"
+                a class="btn btn-warning w-100 h-100" href=category_path(category.id) = "Перейти"
