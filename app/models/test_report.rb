@@ -29,6 +29,8 @@ class TestReport < ApplicationRecord
     belongs_to :test_case, inverse_of: :test_reports
     belongs_to :user
 
+    has_many :requests
+
     rails_admin do
         field :test_case
         field :user

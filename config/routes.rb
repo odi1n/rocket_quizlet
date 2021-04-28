@@ -13,6 +13,6 @@ Rails.application.routes.draw do
 
     resources :categories do
         resources :test_case, only: [:show], path: "test"
-        post "/open", to: "categories#open"
+        get "/open", to: "categories#open"
     end
 end

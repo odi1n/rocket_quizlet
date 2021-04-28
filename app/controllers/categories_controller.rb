@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
     def index
         @categories = Category.all
         # CategoryMailer.open_email.deliver_now
-        CategoryMailer.open_email(current_user).deliver_now
+        # CategoryMailer.open_email(current_user).deliver_now
     end
 
     def show
@@ -10,6 +10,13 @@ class CategoriesController < ApplicationController
     end
 
     def open
-        @category = Category.find(params[:id])
+        if Request.find_by(user: current_user, category_id: params[:category_id].to_i).nil?
+            offset = rand(TestReport.count)
+            test_report = TestReport.offset(offset).first
+            @request = Request.create!(user: current_user, category_id: params[:category_id].to_i, test_report: test_report)
+        else
+            @request = Request.find_by(user: current_user, category_id: params[:category_id].to_i)
+        end
+
     end
 end

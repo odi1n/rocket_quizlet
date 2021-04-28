@@ -19,7 +19,10 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Request < ApplicationRecord
+    extend Enumerize
+    enumerize :state, in: { :pending => 0, :rejected => 1, :confirmed => 2 }, default: :pending
 
     belongs_to :user
     belongs_to :category
+    belongs_to :test_report
 end

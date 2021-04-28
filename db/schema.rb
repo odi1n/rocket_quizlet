@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_14_151630) do
+ActiveRecord::Schema.define(version: 2021_04_28_121132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,7 +101,10 @@ ActiveRecord::Schema.define(version: 2021_04_14_151630) do
     t.bigint "category_id", null: false, comment: "Категории"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "test_report_id"
+    t.integer "state"
     t.index ["category_id"], name: "index_requests_on_category_id"
+    t.index ["test_report_id"], name: "index_requests_on_test_report_id"
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
@@ -161,6 +164,7 @@ ActiveRecord::Schema.define(version: 2021_04_14_151630) do
   add_foreign_key "question_answers", "bases", column: "answer_id"
   add_foreign_key "question_answers", "bases", column: "question_id"
   add_foreign_key "requests", "categories"
+  add_foreign_key "requests", "test_reports"
   add_foreign_key "requests", "users"
   add_foreign_key "test_cases", "categories"
   add_foreign_key "test_reports", "test_cases"
