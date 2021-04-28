@@ -52,6 +52,10 @@ gem 'irb'
 # form
 gem 'simple_form'
 
+# https://github.com/state-machines/state_machines
+gem 'state_machines'
+
+
 
 group :development do
     #gem 'binding_of_caller'
