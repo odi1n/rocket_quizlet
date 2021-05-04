@@ -22,7 +22,7 @@ class Request < ApplicationRecord
     extend Enumerize
     enumerize :state, in: { :pending => 0, :rejected => 1, :confirmed => 2 }, default: :pending
 
-    after_save :send_message, on: [:save]
+    after_save :send_message, if: :changed?
 
     def send_message
         CategoryMailer.open_email(self.user, self.test_report).deliver_now
