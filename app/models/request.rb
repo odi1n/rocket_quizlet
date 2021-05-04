@@ -24,11 +24,29 @@ class Request < ApplicationRecord
 
     after_save :send_message, if: :changed?
 
+    state_machine :state, initial: :pending do
+        event :confirmed do
+            print "xxxxxx"
+        end
+        # after_transition :on => :confirmed, :do => :tow
+    end
+
     def send_message
         CategoryMailer.open_email(self.user, self.test_report).deliver_now
     end
 
+    # def tow
+    #     print "xxxxxx"
+    # end
+
     belongs_to :user
     belongs_to :category
     belongs_to :test_report
+
+    rails_admin do
+        field :user
+        field :category
+        field :test_report
+        field :state
+    end
 end
