@@ -284,6 +284,8 @@ GEM
       rails (>= 4.1.0)
       rails_admin
     rails_admin_settings (1.6.0)
+    rails_admin_state (1.9.1)
+      rails_admin
     rails_admin_toggleable (0.8.3)
       rails_admin
     railties (6.1.3.1)
@@ -460,6 +462,7 @@ DEPENDENCIES
   rails (~> 6.1.0)
   rails-i18n
   rails_admin!
+  rails_admin_state
   rocket_cms_activerecord
   rs-webpack-rails
   rspec-rails

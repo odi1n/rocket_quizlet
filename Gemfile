@@ -54,6 +54,8 @@ gem 'simple_form'
 
 # https://github.com/state-machines/state_machines
 gem 'state_machines'
+# https://github.com/rs-pro/rails_admin_state
+gem 'rails_admin_state'
 
 
 

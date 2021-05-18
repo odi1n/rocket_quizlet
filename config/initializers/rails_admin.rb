@@ -23,6 +23,8 @@ RailsAdmin.config do |config|
   config.actions do
     dashboard # mandatory
 
+    state
+
     # collection actions
     index
     new
@@ -62,7 +64,6 @@ RailsAdmin.config do |config|
   config.excluded_models = [
       'RailsAdmin::CustomShowInApp', 'HistoryTracker',
       'Ckeditor::Asset', 'Ckeditor::AttachmentFile', 'Ckeditor::Picture',
-
       'Base' # Исключаем
   ]
 end

@@ -7,6 +7,9 @@ class Ability
       can :manage, :all
       cannot :destroy, Menu
       cannot :update, Menu
+      can :read, Request
+      can :state, Request # required to do any transitions
+      can :all_events, Request
       if RocketCMS.active_record?
         cannot :destroy, PaperTrail::Version
         cannot :update, PaperTrail::Version
