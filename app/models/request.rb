@@ -63,18 +63,11 @@ class Request < ApplicationRecord
             field :category
             field :test_report
         end
-        edit do
-            field :state, :state
-            field :user
-            field :category
-            field :test_report
-        end
-        show do
-            field :state
-            field :user
-            field :category
-            field :test_report
-        end
+
+        field :state
+        field :user
+        field :category
+        field :test_report
         state({
                   events: { reject: 'btn-danger', in_process: 'btn-warning', confirm: 'btn-success' },
                   states: { rejected: 'label-important', pending: 'label-warning', confirmed: 'label-success' }
